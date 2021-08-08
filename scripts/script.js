@@ -1,31 +1,38 @@
-function cutter (newString) {
-  if (typeof newString !== 'string') return 'WRONG INPUT';
-  
-  while (newString[0] === ' ') {
-    console.log(newString[0]);
-    newString = newString.slice(1);
-  }
+// 1)
+arr = [];
+arr.push('234');
+arr.push('345');
+arr.push('456');
+arr.push('567');
+arr.push('222');
+arr.push('444');
+arr.push('768');
 
-  while (newString.slice(-1) === ' ') {
-    newString = newString.slice(0, -1);
-  }
-
-  if (newString.length > 30) {
-    newString = newString.slice(0, 30) + '...';
-
-  }
-  
-  return newString;
+for(let i = 0; i < arr.length; i++) {
+  if (arr[i].charAt(0) === '2' || arr[i].charAt(0) === '4') {
+    console.log(arr[i]);
+  }  
 }
 
-console.log(cutter(6));
-console.log("_________________________________________")
-console.log(cutter('   паровозик, который смог   '));
-console.log(cutter('   123456789012345678901234567890|1234567890  '));
+
+// 2)
+const isSimple = function(n) {
+  if (n === 0 || n ===1) return false;
+  else {
+    for (let i = 2; i < n; i++) {
+      if (n % i === 0) return false;
+    }
+    return true;
+  }
+};
 
 
-
-
-
+const simpleNumber = function (nStart, nFinish) {
+  for (let i = nStart; i <= nFinish ; i++) {
+    if(isSimple(i)) console.log(i + ' - простое число');
+  }
+};
+  
+  simpleNumber(0, 100);
 
 
