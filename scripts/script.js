@@ -18,6 +18,8 @@ const isNumber = function(n) {
 
 const game = function() {
   const secretNumber = Math.floor(Math.random() * 100);
+  console.log('secretNumber is ' + secretNumber);
+  let attempt = 10;
   
   const result = function() {
     
@@ -27,20 +29,31 @@ const game = function() {
       alert('Введи число!');
       result();
     }
-    else {
+    else if (attempt > 1) {
+      attempt--;
       userNumber = +userNumber;
-      console.log("userNumber: " + userNumber);
     
       if (userNumber < secretNumber) {
-      alert('Загаданное число больше. Попробуй еще раз');
+      alert('Загаданное число больше. Осталось попыток: ' + attempt + '. Попробуй еще раз');
       result();
       }
       else if (userNumber > secretNumber) {
-      alert('Загаданное число меньше. Попробуй еще раз');
-      result();
+        alert('Загаданное число меньше. Осталось попыток: ' + attempt + '. Попробуй еще раз');
+        result();
       }
       else if (userNumber === secretNumber){
-      alert('Поздравляю, Вы угадали!!!');
+        const winMessage = confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+        if (winMessage) game();
+        else {
+          alert('Игра окончена');
+        }
+      }
+    }
+    else {
+      const noMoreAttempt = confirm("Попытки закончились, хотите сыграть еще?");
+      if (noMoreAttempt) game();
+      else {
+        alert('Игра окончена');
       }
     }
   };
