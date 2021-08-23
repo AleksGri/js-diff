@@ -1,53 +1,54 @@
-/*
-1) Создать массив week и записать в него дни недели в виде строк
-
-·        Вывести на экран все дни недели
-
-·        Каждый из них с новой строчки
-
-·        Выходные дни - курсивом
-
-·        Текущий день - жирным шрифтом(использовать объект даты)
-
-
-
-
-2) Запушить проект в репозиторий для усложненных заданий на Github
-*/
-
 'use strict';
 
-const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const body = document.body;
+const allBooks = document.querySelectorAll('.book');
+const book1 = allBooks[1];
+const book2 = allBooks[0]; 
+const book3 = allBooks[4];
+const book4 = allBooks[3];
+const book5 = allBooks[5];
+const book6 = allBooks[2];
+const headBook3 = book3.getElementsByTagName('a')[0];
+const newHeadBook3 = document.createElement('a');
+const advertise = document.querySelector('.adv');
+const book2Content = book2.querySelectorAll('li');
+const book2Chapter1 = book2Content[3];
+const book2Chapter2 = book2Content[6];
+const book2Chapter3 = book2Content[8];
+const book2AddendumA = book2Content[7];
+const book2AddendumB = book2Content[9];
+const book2AddendumC = book2Content[2];
+const book2AddendumD = book2Content[10]; 
+const book5Content = book5.querySelectorAll('li');
+const book5Chapter1 = book5Content[9];
+const book5Chapter2 = book5Content[3];
+const book5Chapter4 = book5Content[2];
+const book5Chapter5 = book5Content[6];
+const book5AddendumA = book5Content[5];
+const book5AddendumB = book5Content[8];
+const book5AddendumC = book5Content[10];
+const book6ContentHTML = book6.querySelector('ul');
+const book6Content = book6ContentHTML.querySelectorAll('li');
+const book6Chapter7 = book6Content[8];
+const book6Chapter8 = book6Chapter7.cloneNode(true);
 
-const print = document.getElementById("print");
-let date = new Date();
-let day = date.getDay();
-console.log(day);
 
-
-for (let i = 0; i < week.length; i++) {
-  if (week[i] === 'Saturday' || week[i] === 'Sunday')
-  {print.innerHTML += "<p><i>" + week[i] + "</i></p>";}
-  else {
-    print.innerHTML += "<p>" + week[i] + "</p>";
-  }
-
-}
-
-const tagP = document.getElementsByTagName("p");
-tagP.style.fontWeight = 'bold';
-
-// const tagP = document.getElementsByTagName("p");
-
-// for (let i = 0; i < week.length; i++) {
-//   if (week[i] === day) tagP.style.fontWeight = 'bold';
-// }
-
-
-
-
-
-
-// week.forEach(e => {
-//   print.innerHTML = "<p>" + e + "</p>";
-// });
+book2.before(book1);
+book4.before(book3);
+book5.after(book6);
+body.style.backgroundImage = "url('/image/you-dont-know-js.jpg')";
+newHeadBook3.href = 'https://github.com/azat-io/you-dont-know-js-ru/blob/master/this%20%26%20object%20prototypes/README.md#you-dont-know-js-this--object-prototypes';
+newHeadBook3.target = "_blank";
+newHeadBook3.textContent = 'Книга 3. this и Прототипы Объектов';
+headBook3.replaceWith(newHeadBook3);
+advertise.remove();
+book2AddendumD.before(book2AddendumC);
+book2AddendumB.before(book2AddendumA);
+book2Chapter1.after(book2Chapter2);
+book2Chapter2.after(book2Chapter3);
+book5AddendumC.before(book5AddendumB);
+book5AddendumB.before(book5AddendumA);
+book5Chapter5.before(book5Chapter4);
+book5Chapter2.before(book5Chapter1);
+book6Chapter8.textContent = 'Глава 8: За пределами ES6';
+book6Chapter7.after(book6Chapter8);
