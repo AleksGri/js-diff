@@ -1,51 +1,53 @@
 /*
-Что должна делать программа:
+1) Создать массив week и записать в него дни недели в виде строк
 
-— спрашивает пользователя: "Угадай число от 1 до 100".
-— если пользовательское число больше, то бот выводит "Загаданное число меньше" и предлагает ввести новый вариант;
-— если пользовательское число меньше, то бот выводит "Загаданное число больше" и предлагает ввести новый вариант;
-— если пользователь ввел не число, то выводит сообщение "Введи число!" и предлагает ввести новый вариант;
-— если пользователь нажимает "Отмена", то игра заканчивается и выводится сообщение "Игра окончена".
+·        Вывести на экран все дни недели
 
-—  если пользовательское число равно загаданному, то игра заканчивается и выводит сообщение  "Поздравляю, Вы угадали!!!".
+·        Каждый из них с новой строчки
+
+·        Выходные дни - курсивом
+
+·        Текущий день - жирным шрифтом(использовать объект даты)
+
+
+
+
+2) Запушить проект в репозиторий для усложненных заданий на Github
 */
 
 'use strict';
 
-const isNumber = function(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
+const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
-const game = function() {
-  const secretNumber = Math.floor(Math.random() * 100);
-  
-  const result = function() {
-    
-    let userNumber = prompt('Угадай число от 1 до 100');
-    if (userNumber === null) alert('Игра окончена');
-    else if (!isNumber(userNumber)) {
-      alert('Введи число!');
-      result();
-    }
-    else {
-      userNumber = +userNumber;
-      console.log("userNumber: " + userNumber);
-    
-      if (userNumber < secretNumber) {
-      alert('Загаданное число больше. Попробуй еще раз');
-      result();
-      }
-      else if (userNumber > secretNumber) {
-      alert('Загаданное число меньше. Попробуй еще раз');
-      result();
-      }
-      else if (userNumber === secretNumber){
-      alert('Поздравляю, Вы угадали!!!');
-      }
-    }
-  };
-  result();
-};
+const print = document.getElementById("print");
+let date = new Date();
+let day = date.getDay();
+console.log(day);
 
-game();
 
+for (let i = 0; i < week.length; i++) {
+  if (week[i] === 'Saturday' || week[i] === 'Sunday')
+  {print.innerHTML += "<p><i>" + week[i] + "</i></p>";}
+  else {
+    print.innerHTML += "<p>" + week[i] + "</p>";
+  }
+
+}
+
+const tagP = document.getElementsByTagName("p");
+tagP.style.fontWeight = 'bold';
+
+// const tagP = document.getElementsByTagName("p");
+
+// for (let i = 0; i < week.length; i++) {
+//   if (week[i] === day) tagP.style.fontWeight = 'bold';
+// }
+
+
+
+
+
+
+// week.forEach(e => {
+//   print.innerHTML = "<p>" + e + "</p>";
+// });
