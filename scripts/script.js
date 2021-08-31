@@ -1,57 +1,47 @@
 'use strict'
 
-const todoControl = document.querySelector('.todo-control');
-const headerInput = document.querySelector('.header-input');
-//const addButton = document.getElementById('add');
-const todoList = document.querySelector('.todo-list');
-const completedList = document.querySelector('.todo-completed');
-
-let todoData = [];
-if (localStorage.getItem('todoData') !== null) {
-  todoData = JSON.parse(localStorage.getItem('todoData'));
+function DomElement(text, selector, height, width, bg, fontSize) {
+  let element;
+  this.text = text;
+  this.selector = selector;
+  this.height = height; 
+  this.width = width;
+  this.bg = bg; 
+  this.fontSize = fontSize;
 }
 
-const render = function() {
-  
-  localStorage.setItem('todoData', JSON.stringify(todoData));
-  todoList.textContent = '';
-  completedList.textContent = '';
-  todoData.forEach(function(item, index){
-    const li = document.createElement('li');
-    li.classList.add('todo-item');
-    li.innerHTML = '<span class="text-todo">' + item.value + '</span>' + 
-          '<div class="todo-buttons">' +
-            '<button class="todo-remove"></button>' +
-            '<button class="todo-complete"></button>' +
-          '</div>';
-    if(item.completed) completedList.append(li);
-    else {
-      todoList.append(li);
-    }
-    const btnComplete = li.querySelector('.todo-complete');
-    btnComplete.addEventListener('click', function(){
-      item.completed = !item.completed;
-      render();
-    });
-    const btnRemove = li.querySelector('.todo-remove');
-    btnRemove.addEventListener('click', function(){
-      todoData.splice(index, 1);
-      render();
-    });
-  });
+DomElement.prototype.createElement = function(){
+  if (this.selector.slice(0,1) === '.') {
+    this.element = document.createElement('div');
+    this.element.classList.add(this.selector.slice(1));
+  } else if (this.selector.slice(0,1) === '#') {
+    this.element = document.createElement('p');
+    this.element.setAttribute('id', this.selector.slice(1));
+  }
+  this.setHeight();
+  this.setWidth();
+  this.setBg();
+  this.setFontSize();
+  this.element.innerHTML = this.text;
+  document.body.append(this.element);
 };
 
-todoControl.addEventListener('submit', function(event){
-  event.preventDefault();
-  if (headerInput.value !== '') {
-    const newTodo = {
-    value: headerInput.value,
-    completed: false,
-    };
-    todoData.push(newTodo);
-    headerInput.value = '';
-    render();
-  }
-});
+DomElement.prototype.setHeight = function(){
+  this.element.style.height = this.height;
+};
 
-render();
+DomElement.prototype.setWidth = function(){
+  this.element.style.width = this.width;
+};
+
+DomElement.prototype.setBg = function(){
+  this.element.style.background = this.bg;
+};
+
+DomElement.prototype.setFontSize = function(){
+  this.element.style.fontSize = this.fontSize;
+};
+
+const fogottenVillage = new DomElement('У бурмистра Власа бабушка Ненила <br> Починить избенку лесу попросила.<br> Отвечал: «Нет лесу, и не жди — не будет!»<br> — «Вот приедет барин — барин нас рассудит,<br> Барин сам увидит, что плоха избушка,<br> И велит дать лесу», — думает старушка.', '.poem', 'fit-content', 'fit-content', 'green', '18px');
+
+fogottenVillage.createElement();
