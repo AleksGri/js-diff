@@ -18,30 +18,32 @@ DomElement.prototype.createElement = function(){
     this.element = document.createElement('p');
     this.element.setAttribute('id', this.selector.slice(1));
   }
-  this.setHeight();
-  this.setWidth();
-  this.setBg();
-  this.setFontSize();
+  this.setHeight(this.height);
+  this.setWidth(this.width);
+  this.setBg(this.bg);
+  this.setFontSize(this.fontSize);
   this.element.innerHTML = this.text;
   document.body.append(this.element);
 };
 
-DomElement.prototype.setHeight = function(){
-  this.element.style.height = this.height;
+DomElement.prototype.setHeight = function(height){
+  this.element.style.height = height;
 };
 
-DomElement.prototype.setWidth = function(){
-  this.element.style.width = this.width;
+DomElement.prototype.setWidth = function(width){
+  this.element.style.width = width;
 };
 
-DomElement.prototype.setBg = function(){
-  this.element.style.background = this.bg;
+DomElement.prototype.setBg = function(bg){
+  this.element.style.background = bg;
 };
 
-DomElement.prototype.setFontSize = function(){
-  this.element.style.fontSize = this.fontSize;
+DomElement.prototype.setFontSize = function(fontSize){
+  this.element.style.fontSize = fontSize;
 };
 
-const fogottenVillage = new DomElement('У бурмистра Власа бабушка Ненила <br> Починить избенку лесу попросила.<br> Отвечал: «Нет лесу, и не жди — не будет!»<br> — «Вот приедет барин — барин нас рассудит,<br> Барин сам увидит, что плоха избушка,<br> И велит дать лесу», — думает старушка.', '.poem', 'fit-content', 'fit-content', 'green', '18px');
+const fogottenVillage = new DomElement('У бурмистра Власа бабушка Ненила <br> Починить избенку лесу попросила.<br> Отвечал: «Нет лесу, и не жди — не будет!»<br> — «Вот приедет барин — барин нас рассудит,<br> Барин сам увидит, что плоха избушка,<br> И велит дать лесу», — думает старушка.', '#poem', 'fit-content', 'fit-content', 'green', '18px');
 
 fogottenVillage.createElement();
+
+fogottenVillage.setBg('red');
