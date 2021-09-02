@@ -1,51 +1,36 @@
 /*
-Что должна делать программа:
-
-— спрашивает пользователя: "Угадай число от 1 до 100".
-— если пользовательское число больше, то бот выводит "Загаданное число меньше" и предлагает ввести новый вариант;
-— если пользовательское число меньше, то бот выводит "Загаданное число больше" и предлагает ввести новый вариант;
-— если пользователь ввел не число, то выводит сообщение "Введи число!" и предлагает ввести новый вариант;
-— если пользователь нажимает "Отмена", то игра заканчивается и выводится сообщение "Игра окончена".
-
-—  если пользовательское число равно загаданному, то игра заканчивается и выводит сообщение  "Поздравляю, Вы угадали!!!".
+Необходимо выполнить в отдельном js файле, подключенному к отдельной HTML странице
+1) Создать массив week и записать в него дни недели в виде строк
+·        Вывести на экран все дни недели
+·        Каждый из них с новой строчки
+·        Выходные дни - курсивом
+·        Текущий день - жирным шрифтом(использовать объект даты)
+2) Запушить проект в репозиторий для усложненных заданий на Github
 */
 
 'use strict';
 
-const isNumber = function(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-};
 
-const game = function() {
-  const secretNumber = Math.floor(Math.random() * 100);
-  
-  const result = function() {
-    
-    let userNumber = prompt('Угадай число от 1 до 100');
-    if (userNumber === null) alert('Игра окончена');
-    else if (!isNumber(userNumber)) {
-      alert('Введи число!');
-      result();
-    }
-    else {
-      userNumber = +userNumber;
-      console.log("userNumber: " + userNumber);
-    
-      if (userNumber < secretNumber) {
-      alert('Загаданное число больше. Попробуй еще раз');
-      result();
-      }
-      else if (userNumber > secretNumber) {
-      alert('Загаданное число меньше. Попробуй еще раз');
-      result();
-      }
-      else if (userNumber === secretNumber){
-      alert('Поздравляю, Вы угадали!!!');
-      }
-    }
-  };
-  result();
-};
+const week = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday', 
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
-game();
+const date = new Date;
+
+week.forEach(function(day){
+  const el = document.createElement('p');
+  if (day === 'Saturday' || day === 'Sunday') el.style.fontStyle = 'Italic';
+  if (day === week[date.getDay()]) el.style.fontWeight = 'Bold';
+  el.textContent = day;
+  document.body.append(el);
+});
+
+
+
 
