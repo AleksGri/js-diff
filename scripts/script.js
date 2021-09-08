@@ -1,36 +1,33 @@
 /*
-Необходимо выполнить в отдельном js файле, подключенному к отдельной HTML странице
-1) Создать массив week и записать в него дни недели в виде строк
-·        Вывести на экран все дни недели
-·        Каждый из них с новой строчки
-·        Выходные дни - курсивом
-·        Текущий день - жирным шрифтом(использовать объект даты)
-2) Запушить проект в репозиторий для усложненных заданий на Github
+На отдельной странице или на доске CodePen
+
+Напишите расширения метода прототипа:
+
+1) Два класса, First и Second, Second наследует от First .
+
+2) В First есть метод hello - он печатает в консоль "Привет я метод родителя!".
+
+3) Нужно написать в Second метод hello, чтоб он сначала вызывал метод hello из First, а потом сразу печатал в консоль "А я наследуемый метод!"
+
+4) Проверить, чтобы все работало без ошибок в консоли 
+
+5) Запушить задание в репозиторий на github или реализовать на доске CodePen и прикрепить ссылку
 */
 
-'use strict';
+class First {
+  hello() {
+    console.log('Привет я метод родителя!');
+  }
 
+}
 
-const week = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday', 
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+class Second extends First {
+  hello() {
+    super.hello();
+    console.log('А я наследуемый метод!');
+  }
 
-const date = new Date;
+}
 
-week.forEach(function(day){
-  const el = document.createElement('p');
-  if (day === 'Saturday' || day === 'Sunday') el.style.fontStyle = 'Italic';
-  if (day === week[date.getDay()]) el.style.fontWeight = 'Bold';
-  el.textContent = day;
-  document.body.append(el);
-});
-
-
-
-
+const second = new Second();
+second.hello();
